@@ -17,6 +17,7 @@ message AccountAdd {
   string email = 1;
   string password = 2;
   string role = 3;
+  string staff_id = 4;
 }
 
 message AccountCreateResponse {}
