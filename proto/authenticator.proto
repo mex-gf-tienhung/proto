@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package mex.authenticator.v1;
+option go_package = "./authenticator";
+
+service AuthenticatorService {
+  rpc AccountCreate(AccountCreateRequest) returns (AccountCreateResponse);
+  rpc AccountDelete(AccountDeleteRequest) returns (AccountDeleteResponse);
+  rpc TokenVerify(TokenVerifyRequest) returns (TokenVerifyResponse);
+}
+
+message AccountCreateRequest {
+  repeated AccountAdd list_account = 1;
+}
+
+message AccountAdd {
+  string email = 1;
+  string password = 2;
+  string role = 3;
+}
+
+message AccountCreateResponse {}
+
+message AccountDeleteRequest {
+  string account_id = 1;
+}
+
+message AccountDeleteResponse {
+  string account_id = 1;
+}
+
+message AccountDetailRequest {
+  string account_id = 1;
+}
+
+message AccountDetailResponse {
+  string account_id = 1;
+  string email = 2;
+  string password = 3;
+  string role = 4;
+}
+
+message AccountAllRequest {
+  string workspace_id = 1;
+}
+
+message AccountAllResponse {
+  string workspace_id = 1;
+  repeated Account account = 2;
+}
+
+message TokenVerifyRequest {
+  string jwt_token = 1;
+}
+
+message TokenVerifyResponse {
+  string user_name = 1;
+  int32 status = 2;
+  string role = 3;
+  string account_id = 4;
+  string owner_id = 5;
+}
+
+message AuthRegenerateTokenRequest {
+  string token = 1;
+  string sub_workspace_id = 2;
+  string position_id = 3;
+}
+
+message AuthRegenerateTokenResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+
+message Account {
+  string id = 1;
+  string email = 2;
+}
