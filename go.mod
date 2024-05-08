@@ -1,10 +1,11 @@
-module github.com/nguyencaohiep/metabox-school-proto
+module github.com/mex-gf-tienhung-proto
 
 go 1.21.5
 
 require (
+	github.com/nguyencaohiep/metabox-school-proto v0.0.0-20240507130254-4cd252397095
 	google.golang.org/grpc v1.63.2
-	google.golang.org/protobuf v1.33.0
+	google.golang.org/protobuf v1.34.1
 )
 
 require (
