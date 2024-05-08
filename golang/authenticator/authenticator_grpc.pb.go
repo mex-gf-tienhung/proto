@@ -19,9 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	AuthenticatorService_AccountCreate_FullMethodName = "/mex.authenticator.v1.AuthenticatorService/AccountCreate"
-	AuthenticatorService_AccountDelete_FullMethodName = "/mex.authenticator.v1.AuthenticatorService/AccountDelete"
-	AuthenticatorService_TokenVerify_FullMethodName   = "/mex.authenticator.v1.AuthenticatorService/TokenVerify"
+	AuthenticatorService_AccountCreate_FullMethodName  = "/mex.authenticator.v1.AuthenticatorService/AccountCreate"
+	AuthenticatorService_AccountDelete_FullMethodName  = "/mex.authenticator.v1.AuthenticatorService/AccountDelete"
+	AuthenticatorService_AccountBlock_FullMethodName   = "/mex.authenticator.v1.AuthenticatorService/AccountBlock"
+	AuthenticatorService_AccountUnblock_FullMethodName = "/mex.authenticator.v1.AuthenticatorService/AccountUnblock"
+	AuthenticatorService_TokenVerify_FullMethodName    = "/mex.authenticator.v1.AuthenticatorService/TokenVerify"
 )
 
 // AuthenticatorServiceClient is the client API for AuthenticatorService service.
@@ -30,6 +32,8 @@ const (
 type AuthenticatorServiceClient interface {
 	AccountCreate(ctx context.Context, in *AccountCreateRequest, opts ...grpc.CallOption) (*AccountCreateResponse, error)
 	AccountDelete(ctx context.Context, in *AccountDeleteRequest, opts ...grpc.CallOption) (*AccountDeleteResponse, error)
+	AccountBlock(ctx context.Context, in *AccountBlockRequest, opts ...grpc.CallOption) (*AccountBlockResponse, error)
+	AccountUnblock(ctx context.Context, in *AccountUnblockRequest, opts ...grpc.CallOption) (*AccountUnblockRespone, error)
 	TokenVerify(ctx context.Context, in *TokenVerifyRequest, opts ...grpc.CallOption) (*TokenVerifyResponse, error)
 }
 
@@ -59,6 +63,24 @@ func (c *authenticatorServiceClient) AccountDelete(ctx context.Context, in *Acco
 	return out, nil
 }
 
+func (c *authenticatorServiceClient) AccountBlock(ctx context.Context, in *AccountBlockRequest, opts ...grpc.CallOption) (*AccountBlockResponse, error) {
+	out := new(AccountBlockResponse)
+	err := c.cc.Invoke(ctx, AuthenticatorService_AccountBlock_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authenticatorServiceClient) AccountUnblock(ctx context.Context, in *AccountUnblockRequest, opts ...grpc.CallOption) (*AccountUnblockRespone, error) {
+	out := new(AccountUnblockRespone)
+	err := c.cc.Invoke(ctx, AuthenticatorService_AccountUnblock_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authenticatorServiceClient) TokenVerify(ctx context.Context, in *TokenVerifyRequest, opts ...grpc.CallOption) (*TokenVerifyResponse, error) {
 	out := new(TokenVerifyResponse)
 	err := c.cc.Invoke(ctx, AuthenticatorService_TokenVerify_FullMethodName, in, out, opts...)
@@ -74,6 +96,8 @@ func (c *authenticatorServiceClient) TokenVerify(ctx context.Context, in *TokenV
 type AuthenticatorServiceServer interface {
 	AccountCreate(context.Context, *AccountCreateRequest) (*AccountCreateResponse, error)
 	AccountDelete(context.Context, *AccountDeleteRequest) (*AccountDeleteResponse, error)
+	AccountBlock(context.Context, *AccountBlockRequest) (*AccountBlockResponse, error)
+	AccountUnblock(context.Context, *AccountUnblockRequest) (*AccountUnblockRespone, error)
 	TokenVerify(context.Context, *TokenVerifyRequest) (*TokenVerifyResponse, error)
 	mustEmbedUnimplementedAuthenticatorServiceServer()
 }
@@ -87,6 +111,12 @@ func (UnimplementedAuthenticatorServiceServer) AccountCreate(context.Context, *A
 }
 func (UnimplementedAuthenticatorServiceServer) AccountDelete(context.Context, *AccountDeleteRequest) (*AccountDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AccountDelete not implemented")
+}
+func (UnimplementedAuthenticatorServiceServer) AccountBlock(context.Context, *AccountBlockRequest) (*AccountBlockResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AccountBlock not implemented")
+}
+func (UnimplementedAuthenticatorServiceServer) AccountUnblock(context.Context, *AccountUnblockRequest) (*AccountUnblockRespone, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AccountUnblock not implemented")
 }
 func (UnimplementedAuthenticatorServiceServer) TokenVerify(context.Context, *TokenVerifyRequest) (*TokenVerifyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TokenVerify not implemented")
@@ -140,6 +170,42 @@ func _AuthenticatorService_AccountDelete_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthenticatorService_AccountBlock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AccountBlockRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthenticatorServiceServer).AccountBlock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthenticatorService_AccountBlock_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthenticatorServiceServer).AccountBlock(ctx, req.(*AccountBlockRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthenticatorService_AccountUnblock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AccountUnblockRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthenticatorServiceServer).AccountUnblock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthenticatorService_AccountUnblock_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthenticatorServiceServer).AccountUnblock(ctx, req.(*AccountUnblockRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthenticatorService_TokenVerify_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TokenVerifyRequest)
 	if err := dec(in); err != nil {
@@ -172,6 +238,14 @@ var AuthenticatorService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AccountDelete",
 			Handler:    _AuthenticatorService_AccountDelete_Handler,
+		},
+		{
+			MethodName: "AccountBlock",
+			Handler:    _AuthenticatorService_AccountBlock_Handler,
+		},
+		{
+			MethodName: "AccountUnblock",
+			Handler:    _AuthenticatorService_AccountUnblock_Handler,
 		},
 		{
 			MethodName: "TokenVerify",

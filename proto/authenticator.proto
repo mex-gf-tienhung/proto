@@ -6,6 +6,8 @@ option go_package = "./authenticator";
 service AuthenticatorService {
   rpc AccountCreate(AccountCreateRequest) returns (AccountCreateResponse);
   rpc AccountDelete(AccountDeleteRequest) returns (AccountDeleteResponse);
+  rpc AccountBlock(AccountBlockRequest) returns (AccountBlockResponse);
+  rpc AccountUnblock(AccountUnblockRequest) returns (AccountUnblockRespone);
   rpc TokenVerify(TokenVerifyRequest) returns (TokenVerifyResponse);
 }
 
@@ -39,6 +41,20 @@ message AccountDetailResponse {
   string email = 2;
   string password = 3;
   string role = 4;
+}
+
+message AccountBlockRequest {
+  string staff_id = 1;
+}
+
+message AccountBlockResponse {
+}
+
+message AccountUnblockRequest {
+  string staff_id = 1;
+}
+
+message AccountUnblockRespone {
 }
 
 message AccountAllRequest {
