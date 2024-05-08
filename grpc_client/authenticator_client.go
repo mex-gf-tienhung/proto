@@ -3,7 +3,7 @@ package grpc_client
 import (
 	"sync"
 
-	"github.com/mex-gf-tienhung-proto/golang/authenticator"
+	"github.com/mex-gf-tienhung/proto/golang/authenticator"
 	"google.golang.org/grpc"
 )
 

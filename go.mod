@@ -1,4 +1,4 @@
-module github.com/mex-gf-tienhung-proto
+module github.com/mex-gf-tienhung/proto
 
 go 1.21.5
 
