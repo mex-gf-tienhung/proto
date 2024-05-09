@@ -90,7 +90,7 @@ message AuthRegenerateTokenResponse {
 }
 
 message AccountUpdateUserNameRequest {
-  string old_phone = 1;
+  string staff_id = 1;
   string new_phone = 2;
 }
 
