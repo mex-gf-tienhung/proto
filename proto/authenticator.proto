@@ -8,6 +8,7 @@ service AuthenticatorService {
   rpc AccountDelete(AccountDeleteRequest) returns (AccountDeleteResponse);
   rpc AccountBlock(AccountBlockRequest) returns (AccountBlockResponse);
   rpc AccountUnblock(AccountUnblockRequest) returns (AccountUnblockRespone);
+  rpc AccountUpdateUserName(AccountUpdateUserNameRequest) returns (Account);
   rpc TokenVerify(TokenVerifyRequest) returns (TokenVerifyResponse);
 }
 
@@ -16,7 +17,7 @@ message AccountCreateRequest {
 }
 
 message AccountAdd {
-  string email = 1;
+  string phone = 1;
   string password = 2;
   string role = 3;
   string staff_id = 4;
@@ -38,7 +39,7 @@ message AccountDetailRequest {
 
 message AccountDetailResponse {
   string account_id = 1;
-  string email = 2;
+  string phone = 2;
   string password = 3;
   string role = 4;
 }
@@ -71,7 +72,7 @@ message TokenVerifyRequest {
 }
 
 message TokenVerifyResponse {
-  string email = 1;
+  string phone = 1;
   int32 status = 2;
   string role = 3;
   string account_id = 4;
@@ -88,8 +89,13 @@ message AuthRegenerateTokenResponse {
   string refresh_token = 2;
 }
 
+message AccountUpdateUserNameRequest {
+  string old_phone = 1;
+  string new_phone = 2;
+}
+
 
 message Account {
   string id = 1;
-  string email = 2;
+  string phone = 2;
 }
