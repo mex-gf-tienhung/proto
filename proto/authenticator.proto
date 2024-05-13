@@ -73,10 +73,11 @@ message TokenVerifyRequest {
 }
 
 message TokenVerifyResponse {
-  string phone = 1;
-  int32 status = 2;
-  string role = 3;
-  string account_id = 4;
+  string username = 1;
+  string account_id = 2;
+  int32 status = 3;
+  string staff_id = 4;
+  string workspace_id = 5;
 }
 
 message AuthRegenerateTokenRequest {
@@ -95,8 +96,7 @@ message AccountUpdateUserNameRequest {
   string new_phone = 2;
 }
 
-
 message Account {
   string id = 1;
-  string phone = 2;
+  string username = 2;
 }
