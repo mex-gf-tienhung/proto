@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package mex.staff.v1;
+option go_package = "./staff";
+
+service StaffService {
+  rpc AddPositionForSuperAdmin(AddPositionForSuperAdminRequest) returns (AddPositionForSuperAdminResponse);
+ 
+}
+
+message AddPositionForSuperAdminRequest {
+  string workspace_id = 1;
+}
+
+
+message AddPositionForSuperAdminResponse {}
+
