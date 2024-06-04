@@ -22,7 +22,7 @@ func ConnectTostaffServer(addr string, options ...grpc.DialOption) error {
 	return err
 }
 
-func staffClient() *staffClientStruct {
+func StaffClient() *staffClientStruct {
 	if _staffClient == nil {
 		panic("grpc staff client: like client is not initiated")
 	}
