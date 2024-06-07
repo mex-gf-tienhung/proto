@@ -27,7 +27,7 @@ message AccountAdd {
 message AccountCreateResponse {}
 
 message AccountDeleteRequest {
-  string account_id = 1;
+  string staff_id = 1;
 }
 
 message AccountDeleteResponse {
